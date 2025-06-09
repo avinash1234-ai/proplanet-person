@@ -7,7 +7,7 @@ export default function Home() {
       <Header />
       <main>
         <section>
-          <h2>Login / Signup</h2>
+          <h2>Welcome to ProPlanetPerson Website</h2>
           <form>
             <label>Email:</label>
             <input type="email" placeholder="you@example.com" />
