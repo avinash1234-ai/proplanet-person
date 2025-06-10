@@ -8,6 +8,7 @@ export default function SubmitTask() {
       <main>
         <section>
           <h2>Submit Task</h2>
+          
           <form>
             <label htmlFor="task">Task Completed:</label>
             <input type="text" id="task" placeholder="E.g., Planted a tree" />

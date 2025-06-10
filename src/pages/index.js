@@ -1,6 +1,7 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
+
 export default function Home() {
   return (
     <>
@@ -19,8 +20,10 @@ export default function Home() {
           <div class="login-image">
       <img src="pro.jpg" alt="Pro Planet Person" />
     </div>
+
         </section>
       </main>
+       
       <Footer />
     </>
   );
