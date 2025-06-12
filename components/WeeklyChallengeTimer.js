@@ -1,14 +1,16 @@
+
 import { useState, useEffect } from "react";
 
 export default function WeeklyChallengeTimer() {
-  
   const [timeLeft, setTimeLeft] = useState(0);
   const [resetDate, setResetDate] = useState(null);
 
   useEffect(() => {
-    const storedDate = localStorage.getItem("weeklyResetDate");
+    if (typeof window === "undefined") return;
 
+    const storedDate = localStorage.getItem("weeklyResetDate");
     let reset;
+
     if (storedDate) {
       reset = new Date(storedDate);
     } else {
@@ -29,12 +31,11 @@ export default function WeeklyChallengeTimer() {
       const diff = resetDate - now;
 
       if (diff <= 0) {
-        
         const newReset = new Date();
         newReset.setDate(newReset.getDate() + 7);
-        setResetDate(newReset);
         localStorage.setItem("weeklyResetDate", newReset.toISOString());
-        setTimeLeft(7 * 24 * 60 * 60); 
+        setResetDate(newReset);
+        setTimeLeft(7 * 24 * 60 * 60);
       } else {
         setTimeLeft(Math.floor(diff / 1000));
       }

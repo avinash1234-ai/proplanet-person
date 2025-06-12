@@ -1,24 +1,29 @@
+
 import { useState, useEffect } from "react";
 
 export default function CoinCounter() {
-  
   const [coins, setCoins] = useState(150);
   const [newCoins, setNewCoins] = useState(0);
 
+  
   useEffect(() => {
-    const interval = setInterval(() => {
-      const earned = Math.floor(Math.random() * 10) + 1;
-      setNewCoins(earned);
-      setCoins((prev) => prev + earned);
-    }, 5000);
+    let interval;
+
+    if (typeof window !== "undefined") {
+      interval = setInterval(() => {
+        const earned = Math.floor(window.crypto.getRandomValues(new Uint32Array(1))[0] % 10) + 1;
+        setNewCoins(earned);
+        setCoins((prev) => prev + earned);
+      }, 5000);
+    }
 
     return () => clearInterval(interval);
   }, []);
 
-
+  
   useEffect(() => {
     if (newCoins > 0) {
-      console.log(`You just earned ${newCoins} coins!`);
+      console.log(`You earned ${newCoins} coins!`);
     }
   }, [newCoins]);
 
@@ -29,4 +34,3 @@ export default function CoinCounter() {
     </section>
   );
 }
-

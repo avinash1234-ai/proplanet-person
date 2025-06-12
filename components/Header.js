@@ -12,6 +12,7 @@ export default function Header() {
         <Link href="/rewards">Rewards</Link>
         <Link href="/leaderboard">Leaderboard</Link>
         <Link href="/profile">Profile</Link>
+        <Link href="/eco-helper">Eco-Helper</Link>
       </nav>
     </header>
   );

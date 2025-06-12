@@ -1,4 +1,3 @@
-// components/EcoAIHelper.js
 import { useState } from "react";
 
 export default function EcoAIHelper() {
