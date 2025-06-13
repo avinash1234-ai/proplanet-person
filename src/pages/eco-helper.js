@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import EcoHelper from "@/components/EcoAIHelper";
+import EcoAIHelper from "@/components/EcoAIHelper";
 
 export default function EcoHelperPage() {
   return (
@@ -8,7 +8,7 @@ export default function EcoHelperPage() {
     <Header />
     <main>
       <h1>🌱 Eco AI Assistant</h1>
-      <EcoHelper />
+      <EcoAIHelper />
     </main>
     <Footer />
     </>
