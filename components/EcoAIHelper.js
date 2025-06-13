@@ -1,3 +1,4 @@
+// components/EcoHelper.js
 import { useState } from "react";
 
 export default function EcoHelper() {
@@ -10,7 +11,7 @@ export default function EcoHelper() {
     setResponse("");
 
     try {
-      const res = await fetch("/api/ecoai", {
+      const res = await fetch("/api/gemini", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: input }),
