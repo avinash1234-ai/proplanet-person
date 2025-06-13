@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import EcoHelper from "@/components/EcoHelper";
+import EcoHelper from "@/components/EcoAIHelper";
 
 export default function EcoHelperPage() {
   return (
