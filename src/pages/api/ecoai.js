@@ -1,26 +1,25 @@
-import { Configuration, OpenAIApi } from "openai";
+import { OpenAI } from "openai";
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY, 
 });
-const openai = new OpenAIApi(configuration);
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") return res.status(405).end();
+  if (req.method !== "POST") {
+    return res.status(405).json({ message: "Only POST requests allowed" });
+  }
 
-  const { message } = req.body;
+  const { prompt } = req.body;
 
   try {
-    const aiResponse = await openai.createChatCompletion({
+    const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: message }],
-      temperature: 0.7,
+      messages: [{ role: "user", content: prompt }],
     });
 
-    const reply = aiResponse.data.choices[0].message.content.trim();
-    res.status(200).json({ reply });
-  } catch (err) {
-    console.error("OpenAI error:", err);
-    res.status(500).json({ error: "Something went wrong with AI response" });
+    res.status(200).json({ result: completion.choices[0].message.content });
+  } catch (error) {
+    console.error("API Error:", error);
+    res.status(500).json({ error: "Failed to get response from OpenAI" });
   }
 }

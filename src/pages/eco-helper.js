@@ -1,15 +1,16 @@
-import EcoAIHelper from "@/components/EcoAIHelper";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import EcoHelper from "@/components/EcoHelper";
 
 export default function EcoHelperPage() {
   return (
     <>
-      <Header />
-      <main>
-        <EcoAIHelper />
-      </main>
-      <Footer />
+    <Header />
+    <main>
+      <h1>🌱 Eco AI Assistant</h1>
+      <EcoHelper />
+    </main>
+    <Footer />
     </>
   );
 }

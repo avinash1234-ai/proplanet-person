@@ -1,36 +1,48 @@
 import { useState } from "react";
 
-export default function EcoAIHelper() {
+export default function EcoHelper() {
   const [input, setInput] = useState("");
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const askAI = async () => {
+  const handleSubmit = async () => {
     setLoading(true);
     setResponse("");
-    const res = await fetch("/api/ecoai", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: input }),
-    });
 
-    const data = await res.json();
-    setResponse(data.reply || "No response received.");
+    try {
+      const res = await fetch("/api/ecoai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: input }),
+      });
+
+      const data = await res.json();
+      setResponse(data.result);
+    } catch (error) {
+      setResponse("Something went wrong.");
+    }
+
     setLoading(false);
   };
 
   return (
     <section>
-      <h2>🌍 Eco AI Helper</h2>
-      <input
-        type="text"
-        placeholder="Ask for eco-tips or new task ideas"
+      <h2>Ask Eco-Helper</h2>
+      <textarea
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
+        placeholder="Ask something like: How can I recycle electronics?"
       />
-      <button onClick={askAI}>Ask AI</button>
-      {loading ? <p>Loading...</p> : <p><strong>AI says:</strong> {response}</p>}
+      <br />
+      <button onClick={handleSubmit} disabled={loading}>
+        {loading ? "Thinking..." : "Ask"}
+      </button>
+      {response && (
+        <div>
+          <h4>Response:</h4>
+          <p>{response}</p>
+        </div>
+      )}
     </section>
   );
 }
